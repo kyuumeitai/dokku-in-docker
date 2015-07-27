@@ -5,6 +5,7 @@ RUN apt-get install -y git make curl software-properties-common sudo wget man op
 RUN apt-get install -y iptables ca-certificates lxc
 RUN locale-gen en_US.* en_AU.*
 RUN git clone https://github.com/progrium/dokku /root/dokku
+RUN apt-get install -y help2man
 RUN cd /root/dokku; make sshcommand pluginhook copyfiles
 RUN dokku plugins-install-dependencies
 RUN dokku plugins-install
