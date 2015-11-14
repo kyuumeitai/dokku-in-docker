@@ -14,9 +14,8 @@ fi
 /usr/local/bin/wrapdocker
 sleep 2
 chmod 777 /var/run/docker.sock
-if [ -f "/root/.firstrun" ]; then
-    docker pull $(grep PREBUILT_STACK_URL /root/dokku/Makefile | head -n1 | cut -d' ' -f3)
-fi
+
+docker pull $(grep PREBUILT_STACK_URL /root/dokku/Makefile | head -n1 | cut -d' ' -f3)
 
 # Install remaining dokku stuff
 if [ -f "/root/.firstrun" ]; then
