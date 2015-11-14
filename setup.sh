@@ -15,7 +15,7 @@ fi
 sleep 2
 chmod 777 /var/run/docker.sock
 if [ -f "/root/.firstrun" ]; then
-    cat /root/buildstep.tar.gz | gunzip -cd | docker import - progrium/buildstep
+    docker pull $(grep PREBUILT_STACK_URL /root/dokku/Makefile | head -n1 | cut -d' ' -f3)
 fi
 
 # Install remaining dokku stuff

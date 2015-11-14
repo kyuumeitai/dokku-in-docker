@@ -1,16 +1,19 @@
 FROM ubuntu:14.04
 
 RUN apt-get update
-RUN apt-get install -y git make curl software-properties-common sudo wget man openssh-server
-RUN apt-get install -y iptables ca-certificates lxc
-RUN locale-gen en_US.* en_AU.*
-RUN git clone https://github.com/progrium/dokku /root/dokku
-RUN apt-get install -y help2man
-RUN cd /root/dokku; make sshcommand pluginhook copyfiles
-RUN dokku plugins-install-dependencies
-RUN dokku plugins-install
+RUN apt-get install -y git make curl software-properties-common sudo wget man openssh-server && apt-get clean
+RUN apt-get install -y iptables ca-certificates lxc && apt-get clean
+RUN apt-get install -y help2man && apt-get clean
 
-RUN wget -O /root/buildstep.tar.gz $(grep PREBUILT_STACK_URL /root/dokku/Makefile | head -n1 | cut -d' ' -f3)
+RUN locale-gen en_US.*
+
+RUN git clone https://github.com/progrium/dokku /root/dokku && \
+	cd /root/dokku/ && \
+	git checkout v0.4.4
+
+RUN cd /root/dokku; make sshcommand plugn version copyfiles
+RUN dokku plugin:install-dependencies --core
+RUN dokku plugin:install --core
 
 VOLUME ["/home/dokku","/var/lib/docker"]
 
