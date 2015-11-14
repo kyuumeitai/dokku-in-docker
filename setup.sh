@@ -33,5 +33,6 @@ if [ -f "/root/.firstrun" ]; then
     unlink /root/.firstrun
 fi
 
-# Open a shell
-bash
+dokku ps:restartall
+
+sleep 99999d
