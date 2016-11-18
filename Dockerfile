@@ -15,14 +15,15 @@ RUN cd /root/dokku; make sshcommand plugn sigil version copyfiles
 RUN dokku plugin:install-dependencies --core
 RUN dokku plugin:install --core
 
+RUN curl -sSL https://get.docker.com/ | sh
+
 VOLUME ["/home/dokku","/var/lib/docker"]
 
 ENV HOME /root
 WORKDIR /root
 ADD ./setup.sh /root/setup.sh
 ADD ./wrapdocker /usr/local/bin/wrapdocker
-ADD https://get.docker.io/builds/Linux/x86_64/docker-latest /usr/local/bin/docker
-RUN chmod +x /usr/local/bin/docker /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker
 RUN touch /root/.firstrun
 
 EXPOSE 22
