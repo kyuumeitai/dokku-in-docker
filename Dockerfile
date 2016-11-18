@@ -17,7 +17,7 @@ RUN dokku plugin:install --core
 
 RUN curl -sSL https://get.docker.com/ | sh
 
-VOLUME ["/home/dokku","/var/lib/docker"]
+VOLUME ["/home/dokku","/var/lib/docker","/var/lib/dokku/data","/var/lib/dokku/services"]
 
 ENV HOME /root
 WORKDIR /root
