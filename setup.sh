@@ -11,7 +11,7 @@ if [ -f "/root/.firstrun" ]; then
 fi
 
 # Install Docker and Buildstep Image
-/usr/local/bin/wrapdocker
+/usr/local/bin/wrapdocker &
 sleep 2
 chmod 777 /var/run/docker.sock
 
