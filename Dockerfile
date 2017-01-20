@@ -9,7 +9,7 @@ RUN locale-gen en_US.*
 
 RUN git clone https://github.com/progrium/dokku /root/dokku && \
 	cd /root/dokku/ && \
-	git checkout v0.7.2
+	git checkout v0.8.0
 
 RUN cd /root/dokku; make sshcommand plugn sigil version copyfiles
 RUN dokku plugin:install-dependencies --core
