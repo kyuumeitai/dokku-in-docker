@@ -19,7 +19,7 @@ docker pull $(grep PREBUILT_STACK_URL /root/dokku/Makefile | head -n1 | cut -d' 
 
 # Install remaining dokku stuff
 if [ -f "/root/.firstrun" ]; then
-    cd /root/dokku
+    cd /go/src/github.com/dokku/dokku
     make sshcommand
     echo $PUBKEY | sshcommand acl-add dokku ${USERNAME}
     echo $VHOSTNAME > /home/dokku/VHOST

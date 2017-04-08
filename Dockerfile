@@ -7,11 +7,19 @@ RUN apt-get install -y help2man && apt-get clean
 
 RUN locale-gen en_US.*
 
-RUN git clone https://github.com/progrium/dokku /root/dokku && \
-	cd /root/dokku/ && \
-	git checkout v0.8.0
+ENV GOLANG_VERSION 1.7.5
+RUN wget -qO /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz     && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
-RUN cd /root/dokku; make sshcommand plugn sigil version copyfiles
+RUN mkdir -p /go/src/github.com/dokku/ && \
+    git clone https://github.com/progrium/dokku /go/src/github.com/dokku/dokku && \
+	cd /go/src/github.com/dokku/dokku && \
+	git checkout v0.9.2
+
+RUN cd /go/src/github.com/dokku/dokku && \
+	make sshcommand plugn sigil version && \
+	export PATH=$PATH:/usr/local/go/bin && \
+	export GOPATH=/go && \
+	make copyfiles PLUGIN_MAKE_TARGET=build
 RUN dokku plugin:install-dependencies --core
 RUN dokku plugin:install --core
 
