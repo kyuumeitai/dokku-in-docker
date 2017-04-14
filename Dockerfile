@@ -24,6 +24,7 @@ RUN dokku plugin:install-dependencies --core
 RUN dokku plugin:install --core
 
 RUN curl -sSL https://get.docker.com/ | sh
+RUN usermod -aG docker dokku
 
 VOLUME ["/home/dokku","/var/lib/docker","/var/lib/dokku/data","/var/lib/dokku/services"]
 
