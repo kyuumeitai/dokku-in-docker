@@ -13,7 +13,7 @@ RUN wget -qO /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz https://storage.googlea
 RUN mkdir -p /go/src/github.com/dokku/ && \
     git clone https://github.com/progrium/dokku /go/src/github.com/dokku/dokku && \
 	cd /go/src/github.com/dokku/dokku && \
-	git checkout v0.12.12
+	git checkout v0.18.2
 
 RUN cd /go/src/github.com/dokku/dokku && \
 	make sshcommand plugn sigil version && \
